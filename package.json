@@ -1,0 +1,38 @@
+{
+  "name": "@lordicon/illustration",
+  "version": "1.0.0",
+  "private": false,
+  "main": "./build/lord-icon-illustration.js",
+  "module": "./build/lord-icon-illustration.js",
+  "typings": "./build/lord-icon-illustration.d.ts",
+  "devDependencies": {
+    "@types/node": "^11.15.7",
+    "express": "^4.17.1",
+    "klaw-sync": "6.0.0",
+    "lottie-web": "^5.6.6",
+    "open": "^6.4.0",
+    "serve-static": "^1.13.2",
+    "terser-webpack-plugin": "^2.3.5",
+    "tslint": "^5.20.1",
+    "typescript": "^3.8.3",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && npm run release && npm run serve-examples",
+    "serve-examples": "node serve-examples.js",
+    "prepare": "npm run build",
+    "release": "webpack --mode production"
+  },
+  "keywords": [
+    "lottie",
+    "icons"
+  ],
+  "sideEffects": false,
+  "author": "Marcin Baszczewski <marcin@baszczewski.pl> (https://www.baszczewski.pl/)",
+  "homepage": "https://lordicon.com/",
+  "repository": "git@github.com:tomwilusz/lord-icon-element-illustration.git",
+  "license": "MIT"
+}
