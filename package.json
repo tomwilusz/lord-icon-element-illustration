@@ -1,6 +1,6 @@
 {
   "name": "lord-icon-illustration",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "main": "./build/lord-icon-illustration.js",
   "module": "./build/lord-icon-illustration.js",
