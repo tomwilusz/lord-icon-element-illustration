@@ -14,18 +14,19 @@ From script module:
 
 ```js
 import { loadAnimation } from "lottie-web";
-import { defineLordIconElement } from "lord-icon-illustration";
+import { defineLordIconIllustration } from "lord-icon-illustration";
 
 // register lottie and define custom element
-defineLordIconElement(loadAnimation);
+defineLordIconIllustration(loadAnimation);
 ```
 
 From markup:
 
 ```html
 <lord-icon-illustration
-  animation="hover"
-  src="/my-icon.json"
+  src-in="/in.json"
+  src-loop="/loop.json"
+  src-action="/action.json"
 ></lord-icon-illustration>
 ```
 
@@ -38,7 +39,7 @@ npm i
 npm start
 ```
 
-After that your browser will start automatically with our [examples](https://github.com/tomwilusz/lord-icon-illustration/tree/master/examples).
+After that your browser will start automatically with our [examples](https://github.com/tomwilusz/lord-icon-element-illustration/tree/master/examples).
 
 ## Notice
 
@@ -48,4 +49,4 @@ It's recommended to use this library with _module bundler_ tools like **webpack*
 
 ### Static release
 
-You can use this library also without JS modules with released version. This is simplest way to use our element without any initialization and external tools. Just look for our [JSFiddle example](https://jsfiddle.net/baszczewski/unw8t93d/1/).
+You can use this library also without JS modules with released version. This is simplest way to use our element without any initialization and external tools. Just look for our [JSFiddle example](https://jsfiddle.net/baszczewski/7wofmuer/5/).

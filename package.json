@@ -1,5 +1,5 @@
 {
-  "name": "@lordicon/illustration",
+  "name": "lord-icon-illustration",
   "version": "1.0.0",
   "private": false,
   "main": "./build/lord-icon-illustration.js",
