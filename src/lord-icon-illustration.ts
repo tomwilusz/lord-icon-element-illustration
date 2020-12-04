@@ -9,6 +9,7 @@ let LOTTIE_LOADER: LottieLoader | undefined;
 const OBSERVED_ATTRIBUTES = [
   "mode",
   "illustration",
+  "animation",
   "src-in",
   "src-loop",
   "src-action",
@@ -17,6 +18,7 @@ const OBSERVED_ATTRIBUTES = [
 type SUPPORTED_ATTRIBUTES =
   | "mode"
   | "illustration"
+  | "animation"
   | "src-in"
   | "src-loop"
   | "src-action";
@@ -52,6 +54,8 @@ export class LordIconIllustration extends HTMLElement {
 
   mode: string;
 
+  animation: string;
+
   protected isReady: boolean;
   protected isRendered: boolean;
   protected isVisible: boolean;
@@ -84,6 +88,7 @@ export class LordIconIllustration extends HTMLElement {
     this.isRendered = false;
     this.isVisible = false;
     this.resumeLoop = false;
+    this.animation = 'in';
 
     this.root = this.attachShadow({
       mode: "open",
@@ -204,13 +209,25 @@ export class LordIconIllustration extends HTMLElement {
       return;
     }
 
-    this.inAnimationContainer!.style.display = "contents";
-    this.inAnimationPlayer!.play();
+    switch (this.animation) {
+    case 'in':
+      this.inAnimationContainer!.style.display = "contents";
+      this.inAnimationPlayer!.play();
+      break;
+    case 'loop':
+      this.loopAnimationContainer!.style.display = "contents";
+      this.loopAnimationPlayer!.play();
+      break;
+    case 'action':
+      this.actionAnimationContainer!.style.display = "contents";
+      this.actionAnimationPlayer!.play();
+      break;
+    }
 
     this.dispatchEvent(
       new CustomEvent("state", {
         detail: {
-          state: "in",
+          state: this.animation,
         },
       })
     );
