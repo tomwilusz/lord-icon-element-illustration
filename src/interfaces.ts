@@ -1,4 +1,4 @@
-import { AnimationConfig, LottiePlayer } from "lottie-web";
+import { AnimationItem, AnimationConfigWithPath, AnimationConfigWithData } from "lottie-web";
 
 /**
  * Interface for animation.
@@ -28,4 +28,4 @@ export interface IAnimation {
 /**
  * Type for loadAnimation method from Lottie.
  */
-export type LottieLoader = (params: AnimationConfig) => LottiePlayer;
+ export type LottieLoader = (params: AnimationConfigWithPath | AnimationConfigWithData) => AnimationItem;

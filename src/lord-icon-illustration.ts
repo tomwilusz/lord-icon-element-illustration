@@ -1,10 +1,10 @@
-import { AnimationConfig, LottiePlayer } from "lottie-web";
+import { AnimationConfig, AnimationConfigWithData, AnimationItem } from "lottie-web";
 import { LottieLoader } from "./interfaces.js";
 
 /**
  * Store loadAnimation from Lottie.
  */
-let LOTTIE_LOADER: LottieLoader | undefined;
+ let LOTTIE_LOADER: LottieLoader|undefined;
 
 const OBSERVED_ATTRIBUTES = [
   "mode",
@@ -44,7 +44,7 @@ const ELEMENT_STYLE = `
 `;
 
 export class LordIconIllustration extends HTMLElement {
-  static registerLoader(loader: (params: AnimationConfig) => LottiePlayer) {
+  static registerLoader(loader: LottieLoader) {
     LOTTIE_LOADER = loader;
   }
 
@@ -74,9 +74,9 @@ export class LordIconIllustration extends HTMLElement {
   protected loopAnimationContainer!: HTMLElement;
   protected actionAnimationContainer!: HTMLElement;
 
-  protected loopAnimationPlayer?: LottiePlayer;
-  protected inAnimationPlayer?: LottiePlayer;
-  protected actionAnimationPlayer?: LottiePlayer;
+  protected loopAnimationPlayer?: AnimationItem;
+  protected inAnimationPlayer?: AnimationItem;
+  protected actionAnimationPlayer?: AnimationItem;
 
   protected queueActionAnimationBound: any;
 
@@ -260,13 +260,15 @@ export class LordIconIllustration extends HTMLElement {
     this.addEventListener("click", this.queueActionAnimationBound);
     this.addEventListener("mouseenter", this.queueActionAnimationBound);
 
-    const baseConfig = {
+    const baseConfig: Omit<AnimationConfigWithData, 'container'> = {
       renderer: "svg",
       loop: false,
       autoplay: false,
-      preserveAspectRatio: "xMidYMid meet",
-      progressiveLoad: true,
-      hideOnTransparent: false,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid meet",
+        progressiveLoad: true,
+        hideOnTransparent: false,
+      },
     };
 
     this.inAnimationPlayer = LOTTIE_LOADER!({
@@ -406,10 +408,12 @@ export class LordIconIllustration extends HTMLElement {
 
 /**
  * Defines custom element "lord-icon-illustration".
- * @param loader Animation loader. Provide Lottie.loadAnimation here.
+ * @param loader Animation loader.
  */
 export function defineLordIconIllustration(loader: LottieLoader) {
   LordIconIllustration.registerLoader(loader);
 
-  customElements.define("lord-icon-illustration", LordIconIllustration);
+  if (!customElements.get || !customElements.get('lord-icon-illustration')) {
+    customElements.define("lord-icon-illustration", LordIconIllustration);
+  }
 }
